@@ -1,13 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controlador;
 
+import vista.AplicacionVista;
 /**
  *
  * @author victo
  */
 public class Controlador {
     
+    AplicacionVista v;
+    
+    public Controlador(AplicacionVista view) {
+        v = view;
+        view.setController(this);
+    }
+    
+    public void IniciarChat(){
+        v.mostrarInicioAplicacion("HOLAH MU BUENA, ETO EH 'jLLM'");
+    }
 }

@@ -1,13 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package vista;
 
+import static com.coti.tools.Esdia.*;
+import controlador.Controlador;
 /**
  *
  * @author victo
  */
-public class VistaConsolaSimple {
+public class VistaConsolaSimple extends AplicacionVista {
+    
+    @Override
+    public void mostrarInicioAplicacion(String infoInicio){
+        System.out.println(infoInicio);
+    }
+    
+    @Override
+    public void mostrarMenuPrincipal(){
+        System.out.println("cargué");
+    }
+    
+    @Override
+    public void mostrarFinPrograma(String infoFin){
+        System.out.println(infoFin);
+    }
     
 }
