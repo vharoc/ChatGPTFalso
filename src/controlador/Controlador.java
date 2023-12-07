@@ -16,5 +16,9 @@ public class Controlador {
     
     public void IniciarChat(){
         v.mostrarInicioAplicacion("HOLAH MU BUENA, ETO EH 'jLLM'");
+        
+        v.mostrarMenuPrincipal();
+        
+        v.mostrarFinPrograma("\nHASTA LA PROXIMAAAAA");
     }
 }
