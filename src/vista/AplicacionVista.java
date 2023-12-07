@@ -6,6 +6,7 @@ import controlador.Controlador;
  *
  * @author victo
  */
+
 public abstract class AplicacionVista {
     
     protected Controlador c;

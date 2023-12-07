@@ -22,7 +22,7 @@ public class Mensaje {
     public String mensajeFormato() {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss");
         String fechaHoraFormato = fechaHora.format(formato);
-        return String.format("%s [%s]: %s", fechaHoraFormato, remitente, contenido);
+        return String.format("%s [%s]: %s", remitente, fechaHoraFormato, contenido);
     }
 
     public String getContenido() {

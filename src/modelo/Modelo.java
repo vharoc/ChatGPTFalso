@@ -18,16 +18,19 @@ import modelo.Conversacion;
  */
 public class Modelo {
     
-    private List<Conversacion> conver;
+    private List<Conversacion> conver = new ArrayList<>();
     
-    public Modelo(){
-        this.conver = new ArrayList<>();
-    }
+    /*
+    public Modelo()
+        this.illm = illm;
+        this.repo = repo;
+    */
     
     public void nuevaConversacion(){
         
         Conversacion nuevaConv = new Conversacion();
         String remitente = readString_ne("Remitente: ");
+        FakeLLM fake = new FakeLLM();
         
         while (true) {
             
@@ -39,6 +42,10 @@ public class Modelo {
 
             nuevaConv.agregarMensaje(remitente, mensaje);
             
+            String respuesta = fake.generarRespuesta(mensaje);
+            System.out.println("Er Fake: " + respuesta);
+            
+            nuevaConv.agregarMensaje("FakerCum", respuesta);
         }
         
         conver.add(nuevaConv);
