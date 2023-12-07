@@ -27,6 +27,7 @@ public class Modelo {
     public void nuevaConversacion(){
         
         Conversacion nuevaConv = new Conversacion();
+        String remitente = readString_ne("Remitente: ");
         
         while (true) {
             
@@ -36,18 +37,11 @@ public class Modelo {
                 break;
             }
 
-            nuevaConv.agregarMensaje(mensaje);
+            nuevaConv.agregarMensaje(remitente, mensaje);
             
         }
         
-        System.out.println("Conversacion finalizada... historial:");
         conver.add(nuevaConv);
-                
-        List<String> chatRecuperar = nuevaConv.obtenerMensajes();
-        
-        for (String elemento : chatRecuperar) {
-            System.out.println(elemento);
-        }
     }
     
     public List<Conversacion> obtenerConversaciones() {

@@ -3,6 +3,7 @@ package vista;
 import static com.coti.tools.Esdia.*;
 import controlador.Controlador;
 import modelo.Conversacion;
+import modelo.Mensaje;
 import java.util.List;
 
 /**
@@ -67,19 +68,35 @@ public class VistaConsolaSimple extends AplicacionVista {
             int numeroMensajes = cv.obtenerMensajes().size();
             String primeros20Caracteres = obtenerPrimeros20Caracteres(cv);
             
-            System.out.println(String.format("%d. %d | %d | %s", i + 1, epochInicio, numeroMensajes, primeros20Caracteres));        
+            System.out.println(String.format("%d. %d | %d | %s", i, epochInicio, numeroMensajes, primeros20Caracteres));        
+        }
+        
+        int opcion = readInt("Mostrar todos los mensajes una de las conversaciones o salir?: ");
+        System.out.println("");
+        for(int i = 0; i < conver.size(); i++){
+            if(i == opcion){
+                Conversacion cv = conver.get(i);
+                List<Mensaje> mensajesConversacionSeleccionada = cv.obtenerMensajes();
+                for (Mensaje mensaje : mensajesConversacionSeleccionada) {
+                    System.out.println("   " + mensaje.mensajeFormato());
+                }
+            }
         }
     }
     
     // Método auxiliar para obtener los primeros 20 caracteres del primer mensaje
     private String obtenerPrimeros20Caracteres(Conversacion conversacion) {
-        List<String> mensajes = conversacion.obtenerMensajes();
+        List<Mensaje> mensajes = conversacion.obtenerMensajes();
         if (!mensajes.isEmpty()) {
-            String primerMensaje = mensajes.get(0);
-            return primerMensaje.length() > 20 ? primerMensaje.substring(0, 20) : primerMensaje;
-        } else {
-            return "";
+            Mensaje primerMensaje = mensajes.get(0);
+            String contenidoPrimerMensaje = primerMensaje.getContenido();
+            return contenidoPrimerMensaje.length() > 20 ? contenidoPrimerMensaje.substring(0, 20) : contenidoPrimerMensaje;
         }
+        return ""; // Agrega un valor de retorno por defecto o manejo de error, si es necesario
     }
+
+
+
+
     
 }

@@ -9,17 +9,18 @@ import java.util.List;
  */
 public class Conversacion {
     
-    private List<String> mensajes;
+    private List<Mensaje> mensajes;
     
     public Conversacion(){
         this.mensajes = new ArrayList<>();
     }
     
-    public void agregarMensaje(String mensaje) {
+    public void agregarMensaje(String remitente, String contenido) {
+        Mensaje mensaje = new Mensaje(remitente, contenido);
         mensajes.add(mensaje);
     }
     
-    public List<String> obtenerMensajes() {
+    public List<Mensaje> obtenerMensajes() {
         return new ArrayList<>(mensajes);
     }
             
