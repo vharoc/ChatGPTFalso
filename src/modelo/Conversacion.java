@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -10,4 +9,18 @@ package modelo;
  */
 public class Conversacion {
     
+    private List<String> mensajes;
+    
+    public Conversacion(){
+        this.mensajes = new ArrayList<>();
+    }
+    
+    public void agregarMensaje(String mensaje) {
+        mensajes.add(mensaje);
+    }
+    
+    public List<String> obtenerMensajes() {
+        return new ArrayList<>(mensajes);
+    }
+            
 }

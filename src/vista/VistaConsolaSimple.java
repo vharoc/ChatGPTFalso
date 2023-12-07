@@ -2,6 +2,9 @@ package vista;
 
 import static com.coti.tools.Esdia.*;
 import controlador.Controlador;
+import modelo.Conversacion;
+import java.util.List;
+
 /**
  *
  * @author victo
@@ -29,7 +32,7 @@ public class VistaConsolaSimple extends AplicacionVista {
                     nuevaConversacion();
                     break;
                 case 2:
-                    // eliminarAlumnoPorDNI();
+                    mostrarConversaciones();
                     break;
                 case 3:
                     // importarAlumnos();
@@ -49,8 +52,34 @@ public class VistaConsolaSimple extends AplicacionVista {
     }
     
     public void nuevaConversacion(){
+        c.nuevaConversacion();
+    }
+    
+    public void mostrarConversaciones() {
+        System.out.println("\nLista de conversaciones:");
         
-             
+        List<Conversacion> conver = c.mostrarEliminarConversaciones();
+        
+        for (int i = 0; i < conver.size(); i++) {
+            Conversacion cv = conver.get(i);
+
+            long epochInicio = System.currentTimeMillis();  // Reemplaza esto con el valor correcto
+            int numeroMensajes = cv.obtenerMensajes().size();
+            String primeros20Caracteres = obtenerPrimeros20Caracteres(cv);
+            
+            System.out.println(String.format("%d. %d | %d | %s", i + 1, epochInicio, numeroMensajes, primeros20Caracteres));        
+        }
+    }
+    
+    // Método auxiliar para obtener los primeros 20 caracteres del primer mensaje
+    private String obtenerPrimeros20Caracteres(Conversacion conversacion) {
+        List<String> mensajes = conversacion.obtenerMensajes();
+        if (!mensajes.isEmpty()) {
+            String primerMensaje = mensajes.get(0);
+            return primerMensaje.length() > 20 ? primerMensaje.substring(0, 20) : primerMensaje;
+        } else {
+            return "";
+        }
     }
     
 }
