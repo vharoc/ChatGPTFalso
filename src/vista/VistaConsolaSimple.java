@@ -1,10 +1,16 @@
 package vista;
 
 import static com.coti.tools.Esdia.*;
+
+import modelo.FakeLLM;
 import controlador.Controlador;
 import modelo.Conversacion;
 import modelo.Mensaje;
+
 import java.util.List;
+import java.util.ArrayList;
+
+import java.time.Instant;
 
 /**
  *
@@ -52,33 +58,97 @@ public class VistaConsolaSimple extends AplicacionVista {
         System.out.println(infoFin);
     }
     
-    public void nuevaConversacion(){
-        c.nuevaConversacion();
-    }
     
-    public void mostrarConversaciones() {
-        System.out.println("\nLista de conversaciones:");
+    public void nuevaConversacion(){
+        //c.nuevaConversacion();
+        int i = 0;
         
-        List<Conversacion> conver = c.mostrarEliminarConversaciones();
+        FakeLLM fake = new FakeLLM();
+                
+        List<Mensaje> nuevoMsg = new ArrayList<>();
+        Mensaje nuevo = null;
         
-        for (int i = 0; i < conver.size(); i++) {
-            Conversacion cv = conver.get(i);
-
-            long epochInicio = System.currentTimeMillis();  // Reemplaza esto con el valor correcto
-            int numeroMensajes = cv.obtenerMensajes().size();
-            String primeros20Caracteres = obtenerPrimeros20Caracteres(cv);
+        long fechaInicio = Instant.now().getEpochSecond();
+                
+        while (true) {
             
-            System.out.println(String.format("%d. %d | %d | %s", i, epochInicio, numeroMensajes, primeros20Caracteres));        
+            if (i == 0){
+                
+                long fecha = Instant.now().getEpochSecond();
+                String formato = c.formatearFecha(fecha);
+                
+                String mensaje = readString_ne("Yo [" + formato + "]: ");
+
+                if ("/salir".equals(mensaje)) {
+                    break;
+                }
+                
+                nuevo = c.crearMensaje("Yo", mensaje, formato);
+                nuevoMsg.add(nuevo);
+                
+                i = 1;
+            }
+            
+            if ( i == 1 ){
+                
+                long fecha2 = Instant.now().getEpochSecond();
+                String formato2 = c.formatearFecha(fecha2);
+                
+                String m = c.getContenidoMensaje(nuevo);
+                
+                String respuesta = fake.generarRespuesta(m);
+                
+                System.out.println("Er Fake [" + formato2 + "]: " + respuesta);
+                
+                nuevoMsg.add(c.crearMensaje("BOT", respuesta, formato2));
+                                                
+                i = 0;
+            }
+           
         }
         
-        int opcion = readInt("Mostrar todos los mensajes una de las conversaciones o salir?: ");
-        System.out.println("");
-        for(int i = 0; i < conver.size(); i++){
+        long fechaFin = Instant.now().getEpochSecond();
+        
+        Conversacion nuevaConv = c.crearConversacion(nuevoMsg, "bot", fechaInicio, fechaFin);
+        
+        c.agregarConversacionAConversaciones(nuevaConv);
+        
+    }
+        
+    public void mostrarConversaciones() {
+        
+        System.out.println("\nLista de conversaciones:");
+        
+        List<Conversacion> conversaciones = c.obtenerConversaciones();
+        
+        for (int i = 0; i < conversaciones.size(); i++) {
+        
+            Conversacion conversacion = conversaciones.get(i);
+            
+            long epoch = c.obtenerEpoch(conversacion);
+            int numeroMensajes = c.obtenerMensajes(conversacion).size();
+            String primeros20Caracteres = obtenerPrimeros20Caracteres(conversacion);
+            
+            System.out.println(String.format("%d. %d | %d | %s", i, epoch, numeroMensajes, primeros20Caracteres)); 
+                  
+        }
+        
+        int opcion = readInt("Mostrar todos los mensajes una de las conversaciones(1), eliminar una conversacion(2) o salir?: ");
+        
+        for(int i = 0; i < conversaciones.size(); i++){
             if(i == opcion){
-                Conversacion cv = conver.get(i);
-                List<Mensaje> mensajesConversacionSeleccionada = cv.obtenerMensajes();
-                for (Mensaje mensaje : mensajesConversacionSeleccionada) {
-                    System.out.println("   " + mensaje.mensajeFormato());
+                Conversacion conversacion = conversaciones.get(i);
+                long dia = c.obtenerDia(conversacion);
+                String formato = c.formatearFecha(dia);
+                System.out.println("Conversacion del " + formato);
+                System.out.println("");
+                
+                List<Mensaje> mensajes = c.obtenerMensajes(conversacion);
+                for(Mensaje m : mensajes){
+                    String emisor = c.getEmisor(m);
+                    String hora = c.getHora(m);
+                    String mensaje = c.getContenidoMensaje(m);
+                    System.out.println(emisor + " [" + hora + "]: " + mensaje);
                 }
             }
         }
@@ -94,9 +164,5 @@ public class VistaConsolaSimple extends AplicacionVista {
         }
         return ""; // Agrega un valor de retorno por defecto o manejo de error, si es necesario
     }
-
-
-
-
     
 }

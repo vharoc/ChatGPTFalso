@@ -11,18 +11,12 @@ public class Mensaje {
 
     private String remitente;
     private String contenido;
-    private LocalDateTime fechaHora;
+    private String fechaHora; // String o long
 
-    public Mensaje(String remitente, String contenido) {
+    public Mensaje(String remitente, String contenido, String fechaHora) {
         this.remitente = remitente;
         this.contenido = contenido;
-        this.fechaHora = LocalDateTime.now();
-    }
-
-    public String mensajeFormato() {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss");
-        String fechaHoraFormato = fechaHora.format(formato);
-        return String.format("%s [%s]: %s", remitente, fechaHoraFormato, contenido);
+        this.fechaHora = fechaHora;
     }
 
     public String getContenido() {
@@ -31,6 +25,22 @@ public class Mensaje {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+
+    public String getRemitente() {
+        return remitente;
+    }
+
+    public void setRemitente(String remitente) {
+        this.remitente = remitente;
+    }
+
+    public String getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(String fechaHora) {
+        this.fechaHora = fechaHora;
     }
     
     
