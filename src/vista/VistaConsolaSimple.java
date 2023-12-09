@@ -156,7 +156,7 @@ public class VistaConsolaSimple extends AplicacionVista {
     
     // Método auxiliar para obtener los primeros 20 caracteres del primer mensaje
     private String obtenerPrimeros20Caracteres(Conversacion conversacion) {
-        List<Mensaje> mensajes = conversacion.obtenerMensajes();
+        List<Mensaje> mensajes = conversacion.getMensajes();
         if (!mensajes.isEmpty()) {
             Mensaje primerMensaje = mensajes.get(0);
             String contenidoPrimerMensaje = primerMensaje.getContenido();

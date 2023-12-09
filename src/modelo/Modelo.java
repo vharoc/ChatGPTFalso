@@ -51,9 +51,6 @@ public class Modelo {
         return contenido;
     }
     
-    public void agregarMensajeConversacion(Conversacion conversacion, Mensaje mensaje){
-        conversacion.agregarMensaje(mensaje);
-    }
     
     public void agregarConversacionAConversaciones(Conversacion conversacion){
         conversaciones.add(conversacion);
@@ -96,45 +93,5 @@ public class Modelo {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    public void nuevaConversacion(){
-        
-        Conversacion nuevaConv = new Conversacion();
-        
-        long fecha_inicio = nuevaConv.getFechaInicio();
-        
-        String remitente = readString_ne("Remitente: ");
-        FakeLLM fake = new FakeLLM();
-        
-        while (true) {
-            
-            String mensaje = readString_ne("Tu mensaje: ");
-
-            if ("/salir".equals(mensaje)) {
-                break;
-            }
-
-            nuevaConv.agregarMensaje(remitente, mensaje);
-            
-            String respuesta = fake.generarRespuesta(mensaje);
-            System.out.println("Er Fake: " + respuesta);
-            
-            nuevaConv.agregarMensaje("FakerCum", respuesta);
-        }
-        
-        conversaciones.add(nuevaConv);
-    }
-    
-    /*
-    public List<Conversacion> obtenerConversaciones() {
-        return new ArrayList<>(conver);
-    }
-    */
     
 }

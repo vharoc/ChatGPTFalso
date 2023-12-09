@@ -45,9 +45,6 @@ public class Controlador {
         return m.getConenidoMensaje(mensaje);
     }
     
-    public void agregarMensajeConversacion(Conversacion conversacion, Mensaje mensaje){
-        m.agregarMensajeConversacion(conversacion, mensaje);
-    }
     
     public void agregarConversacionAConversaciones(Conversacion conversacion){
         m.agregarConversacionAConversaciones(conversacion);
@@ -81,21 +78,5 @@ public class Controlador {
         return m.getHora(mensaje);
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public void nuevaConversacion(){
-        m.nuevaConversacion();
-    }
-    
-    public List<Conversacion> mostrarEliminarConversaciones() {
-        return m.obtenerConversaciones();        
-    }
 
 }

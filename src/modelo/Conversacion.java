@@ -25,15 +25,6 @@ public class Conversacion {
         this.fechaFin = fechaFin;        
     }
     
-    public void agregarMensaje(Mensaje mensaje) {
-        mensajes.add(mensaje);
-    }
-    
-    public List<Mensaje> obtenerMensajes() {
-        return new ArrayList<>(mensajes);
-    }
-    
-    
     public long getFechaInicio() {
         return fechaInicio;
     }
