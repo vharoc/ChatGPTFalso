@@ -1,15 +1,17 @@
 package modelo;
 
-import java.util.ArrayList;
-        
+import java.util.List;
+
 /**
  *
  * @author victo
+ *
  */
+
 public interface IRepositorio {
     
-    public ArrayList<Conversacion> importarConversacion();
+    public List<Conversacion> importarConversacion();
     
-    public void exportarConversacion(ArrayList<Conversacion> conversacion);
+    public void exportarConversacion(List<Conversacion> conversacion);
     
 }

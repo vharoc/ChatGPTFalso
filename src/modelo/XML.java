@@ -17,11 +17,13 @@ import java.util.List;
  */
 public class XML implements IRepositorio{
     
-    Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "output.json");
-    File f = ruta.toFile();
+    // Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "output.json");
+    // File f = ruta.toFile();
     
     @Override
-    public void exportarConversacion(ArrayList<Conversacion> conversacion) {
+    public void exportarConversacion(List<Conversacion> conversacion) {
+        Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "output.xml");
+        File f = ruta.toFile();
         try {
             XmlMapper xmlMapper = new XmlMapper();
             String xml = xmlMapper.writeValueAsString(conversacion);
@@ -39,7 +41,9 @@ public class XML implements IRepositorio{
     }
     
     @Override
-    public ArrayList<Conversacion> importarConversacion() {
+    public List<Conversacion> importarConversacion() {
+        Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.xml");
+        File f = ruta.toFile();
         try {
             XmlMapper xmlMapper = new XmlMapper();
             String xml = new String(Files.readAllBytes(f.toPath()), StandardCharsets.UTF_8);

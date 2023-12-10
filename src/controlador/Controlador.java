@@ -81,7 +81,14 @@ public class Controlador {
         return m.eliminarConversacion(conversacion);
     }
     
+    public boolean importarConversacion() {
+        return m.importarConversacion();
+    }
     
+    public void exportarConversacion() {
+        m.exportarConversacion();
+    }
+
     
 
 }

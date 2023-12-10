@@ -33,6 +33,8 @@ public class VistaConsolaSimple extends AplicacionVista {
             System.out.println("3. Exportacion chats");
             System.out.println("4. Salir");
             opcion = readInt("Ingrese una opción: ");
+            System.out.println("");
+            limpiarPantalla();
 
             switch (opcion) {
                 case 1:
@@ -42,7 +44,7 @@ public class VistaConsolaSimple extends AplicacionVista {
                     mostrarConversaciones();
                     break;
                 case 3:
-                    // importarAlumnos();
+                    importarExportarChats();
                     break;
                 case 4:
                     break;
@@ -112,11 +114,13 @@ public class VistaConsolaSimple extends AplicacionVista {
         
         c.agregarConversacionAConversaciones(nuevaConv);
         
+        limpiarPantalla();
+        
     }
         
     public void mostrarConversaciones() {
         
-        System.out.println("\nLista de conversaciones:");
+        System.out.println("Lista de conversaciones:");
         
         List<Conversacion> conversaciones = c.obtenerConversaciones();
         
@@ -138,6 +142,7 @@ public class VistaConsolaSimple extends AplicacionVista {
         
         if(opcion == 0){
             int opcionConversacion = readInt("De que conversacion quieres ver los mensajes?: ");
+            System.out.println("");
             for(int i = 0; i < conversaciones.size(); i++){
                 if(i == opcionConversacion){
                     Conversacion conversacion = conversaciones.get(i);
@@ -159,6 +164,7 @@ public class VistaConsolaSimple extends AplicacionVista {
         
         if(opcion == 1){
             int opcionEliminar = readInt("Que conversacion quieres eliminar?: ");
+            System.out.println("");
             for(int i = 0; i < conversaciones.size(); i++){
                 if(i == opcionEliminar){
                     Conversacion conversacionEliminar = conversaciones.get(i);
@@ -168,7 +174,8 @@ public class VistaConsolaSimple extends AplicacionVista {
                 }
             }
         }
-        
+        esperarEnter();
+        limpiarPantalla();
     }
     
     // Método auxiliar para obtener los primeros 20 caracteres del primer mensaje
@@ -182,4 +189,32 @@ public class VistaConsolaSimple extends AplicacionVista {
         return ""; // Agrega un valor de retorno por defecto o manejo de error, si es necesario
     }
     
+    public void importarExportarChats(){
+        System.out.println("IMPORTAR Y EXPORTAR CHATS");
+        System.out.println("");
+        int opcion = readInt("Quieres importar(0) o exportar?(1): ");
+        
+        if(opcion == 0){
+            if(c.importarConversacion()){
+                System.out.println("Importacion con exito");
+            }else{
+                System.out.println("fallo");
+            }
+        }
+        
+        if(opcion == 1){
+            c.exportarConversacion();
+        }
+    }
+    
+    public void limpiarPantalla(){
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+    }
+    
+    private static void esperarEnter() {
+        readString_ne("\nPresiona Enter para continuar... ");
+    }
 }
+

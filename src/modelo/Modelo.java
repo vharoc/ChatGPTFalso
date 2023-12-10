@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-
 /**
  *
  * @author victo
@@ -29,14 +28,14 @@ public class Modelo {
     private List<Conversacion> conversaciones = new ArrayList<>();
     
     // private ILLM illm;
-    // private IRepositorio repositorio;
+    private IRepositorio repositorio;
     
     /*
-    public Modelo()
-        this.illm = illm;
-        this.repo = repo;
+    public Modelo(IRepositorio repositorio){
+        this.repositorio = repositorio;
+    }
     */
-    
+
     public Mensaje crearMensaje(String remitente, String contenido, String fechaHora){
         Mensaje nuevoMensaje = new Mensaje(remitente, contenido, fechaHora);
         return nuevoMensaje;
@@ -95,5 +94,28 @@ public class Modelo {
     public boolean eliminarConversacion(Conversacion conversacion){
         return conversaciones.remove(conversacion);
     }
+    
+    public boolean importarConversacion() {
+        JSON j = new JSON();
+        List<Conversacion> conver = j.importarConversacion();
+        
+        if (conver != null) {
+            for (Conversacion conversacion : conver) {
+                
+                if (!conversaciones.contains(conversacion)) {
+                    conversaciones.add(conversacion);
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public void exportarConversacion() {
+        JSON j = new JSON();
+        j.exportarConversacion(conversaciones);
+    }
+    
     
 }
