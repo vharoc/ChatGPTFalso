@@ -92,6 +92,8 @@ public class Modelo {
         return mensaje.getFechaHora();
     }
     
-    
+    public boolean eliminarConversacion(Conversacion conversacion){
+        return conversaciones.remove(conversacion);
+    }
     
 }

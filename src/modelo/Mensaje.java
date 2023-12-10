@@ -1,13 +1,15 @@
 package modelo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author victo
+ * 
  */
-public class Mensaje {
+
+public class Mensaje implements Serializable{
 
     private String remitente;
     private String contenido;
@@ -43,5 +45,16 @@ public class Mensaje {
         this.fechaHora = fechaHora;
     }
     
-    
+    public static String getMensajeFromDelimitedString(List<Mensaje> mensajes) {
+        
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        for (Mensaje mensaje : mensajes) {
+            stringBuilder.append(mensaje.getRemitente()).append(",");
+            stringBuilder.append(mensaje.getContenido()).append(",");
+            stringBuilder.append(mensaje.getFechaHora()).append(";");
+        } 
+
+        return stringBuilder.toString();
+    }
 }

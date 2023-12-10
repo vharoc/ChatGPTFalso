@@ -2,12 +2,13 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 /**
  *
  * @author victo
  */
-public class Conversacion {
+public class Conversacion implements Serializable{
     
     private List<Mensaje> mensajes;
     private String identificador;
@@ -48,7 +49,5 @@ public class Conversacion {
     public void setMensajes(List<Mensaje> mensajes) {
         this.mensajes = mensajes;
     }
-    
-    
-            
+           
 }
