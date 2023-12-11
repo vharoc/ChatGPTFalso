@@ -6,6 +6,7 @@ package modelo;
  */
 public interface ILLM {
     
-    String generarRespuesta(String msgUSR);
+    public String generarRespuesta(String msgUSR);
     
+    public String obtenerIdentificador();
 }

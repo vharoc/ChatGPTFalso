@@ -1,7 +1,9 @@
 package vista;
 
+import com.coti.tools.Esdia;
 import static com.coti.tools.Esdia.*;
 
+import java.util.Scanner;
 import modelo.FakeLLM;
 import controlador.Controlador;
 import modelo.Conversacion;
@@ -66,7 +68,7 @@ public class VistaConsolaSimple extends AplicacionVista {
         int i = 0;
         
         FakeLLM fake = new FakeLLM();
-                
+        String illm = c.obtenerIdentificador();
         List<Mensaje> nuevoMsg = new ArrayList<>();
         Mensaje nuevo = null;
         
@@ -99,9 +101,9 @@ public class VistaConsolaSimple extends AplicacionVista {
                 
                 String respuesta = fake.generarRespuesta(m);
                 
-                System.out.println("Er Fake [" + formato2 + "]: " + respuesta);
+                System.out.println(illm + " [" + formato2 + "]: " + respuesta);
                 
-                nuevoMsg.add(c.crearMensaje("BOT", respuesta, formato2));
+                nuevoMsg.add(c.crearMensaje(illm, respuesta, formato2));
                                                 
                 i = 0;
             }
@@ -110,7 +112,7 @@ public class VistaConsolaSimple extends AplicacionVista {
         
         long fechaFin = Instant.now().getEpochSecond();
         
-        Conversacion nuevaConv = c.crearConversacion(nuevoMsg, "bot", fechaInicio, fechaFin);
+        Conversacion nuevaConv = c.crearConversacion(nuevoMsg, illm, fechaInicio, fechaFin);
         
         c.agregarConversacionAConversaciones(nuevaConv);
         
@@ -136,44 +138,65 @@ public class VistaConsolaSimple extends AplicacionVista {
                   
         }
         System.out.println("");
+        System.out.println("===================================================");
+        System.out.println("           MENU SELENCCION OPCIONES                ");
+        System.out.println("===================================================");
+        System.out.println("0. MOSTRAR TODOS LOS MENSAJES DE UNA CONVERSACION");
+        System.out.println("1. ELIMINAR UNA CONVERSACION");
+        System.out.println("2. SALIR");
         
-        int opcion = readInt("Mostrar todos los mensajes una de las conversaciones(0), eliminar una conversacion(1) o salir?: ");
-        System.out.println("");
-        
-        if(opcion == 0){
-            int opcionConversacion = readInt("De que conversacion quieres ver los mensajes?: ");
+        int opcion; 
+        do{
+            opcion = readInt("OPCION ... ");
             System.out.println("");
-            for(int i = 0; i < conversaciones.size(); i++){
-                if(i == opcionConversacion){
-                    Conversacion conversacion = conversaciones.get(i);
-                    long dia = c.obtenerDia(conversacion);
-                    String formato = c.formatearFecha(dia);
-                    System.out.println("Conversacion del " + formato);
-                    System.out.println("");
+            switch(opcion){
+                case 0:
+                    int opcionConversacion = readInt("De que conversacion quieres ver los mensajes?: ");
+                        System.out.println("");
+                        for(int i = 0; i < conversaciones.size(); i++){
+                            if(i == opcionConversacion){
+                                Conversacion conversacion = conversaciones.get(i);
+                                long dia = c.obtenerDia(conversacion);
+                                String formato = c.formatearFecha(dia);
+                                System.out.println("Conversacion del " + formato);
+                                System.out.println("");
 
-                    List<Mensaje> mensajes = c.obtenerMensajes(conversacion);
-                    for(Mensaje m : mensajes){
-                        String emisor = c.getEmisor(m);
-                        String hora = c.getHora(m);
-                        String mensaje = c.getContenidoMensaje(m);
-                        System.out.println(emisor + " [" + hora + "]: " + mensaje);
+                                List<Mensaje> mensajes = c.obtenerMensajes(conversacion);
+                                for(Mensaje m : mensajes){
+                                    String emisor = c.getEmisor(m);
+                                    String hora = c.getHora(m);
+                                    String mensaje = c.getContenidoMensaje(m);
+                                    System.out.println(emisor + " [" + hora + "]: " + mensaje);
+                                }
+                            }
+                        }
+                    System.out.println("");
+                    opcion = 2;
+                    break;
+
+                case 1:
+                    int opcionEliminar = readInt("Que conversacion quieres eliminar?: ");
+                    System.out.println("");
+                    for(int i = 0; i < conversaciones.size(); i++){
+                        if(i == opcionEliminar){
+                            Conversacion conversacionEliminar = conversaciones.get(i);
+                            if(c.eliminarConversacion(conversacionEliminar)){
+                                System.out.println("Se elimino correctamente");
+                            }
+                        }
                     }
-                }
+                    System.out.println("");
+                    opcion = 2;
+                    break;
+
+                case 2:
+                    break;
+
+                default:
+                    System.out.println("opcion no valida\n");
             }
-        }
-        
-        if(opcion == 1){
-            int opcionEliminar = readInt("Que conversacion quieres eliminar?: ");
-            System.out.println("");
-            for(int i = 0; i < conversaciones.size(); i++){
-                if(i == opcionEliminar){
-                    Conversacion conversacionEliminar = conversaciones.get(i);
-                    if(c.eliminarConversacion(conversacionEliminar)){
-                        System.out.println("Se elimino correctamente");
-                    }
-                }
-            }
-        }
+        }while(opcion != 2);
+             
         esperarEnter();
         limpiarPantalla();
     }
@@ -214,7 +237,8 @@ public class VistaConsolaSimple extends AplicacionVista {
     }
     
     private static void esperarEnter() {
-        readString_ne("\nPresiona Enter para continuar... ");
+        Esdia.readString("Presiona Enter para continuar... ");
     }
+    
 }
 

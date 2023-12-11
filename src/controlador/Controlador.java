@@ -89,6 +89,9 @@ public class Controlador {
         m.exportarConversacion();
     }
 
+    public String obtenerIdentificador(){
+        return m.obtenerIdentificador();
+    }
     
 
 }

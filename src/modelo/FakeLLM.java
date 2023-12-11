@@ -15,6 +15,14 @@ public class FakeLLM implements ILLM {
     private static final List<String> CONSEJOS = Arrays.asList("ten cuidado", "sigue así", "no te preocupes demasiado", "disfruta el momento");
     private static final List<String> RESPUESTAS_GENERICAS = Arrays.asList("Interesante", "¿Me puedes contar más?", "¡Eso suena bien!");
 
+    
+    @Override
+    public String obtenerIdentificador(){
+        String fake = "fake";
+        return fake;
+    }
+    
+    
     @Override
     public String generarRespuesta(String mensajeUsuario) {
         // Convertir el mensaje a minúsculas para hacer la comparación de manera insensible a mayúsculas

@@ -27,14 +27,15 @@ public class Modelo {
         
     private List<Conversacion> conversaciones = new ArrayList<>();
     
-    // private ILLM illm;
+    private ILLM illm;
     private IRepositorio repositorio;
     
-    /*
-    public Modelo(IRepositorio repositorio){
+    
+    public Modelo(IRepositorio repositorio, ILLM illm){
         this.repositorio = repositorio;
+        this.illm = illm;
     }
-    */
+    
 
     public Mensaje crearMensaje(String remitente, String contenido, String fechaHora){
         Mensaje nuevoMensaje = new Mensaje(remitente, contenido, fechaHora);
@@ -96,8 +97,7 @@ public class Modelo {
     }
     
     public boolean importarConversacion() {
-        JSON j = new JSON();
-        List<Conversacion> conver = j.importarConversacion();
+        List<Conversacion> conver = repositorio.importarConversacion();
         
         if (conver != null) {
             for (Conversacion conversacion : conver) {
@@ -113,9 +113,11 @@ public class Modelo {
     }
     
     public void exportarConversacion() {
-        JSON j = new JSON();
-        j.exportarConversacion(conversaciones);
+       repositorio.exportarConversacion(conversaciones);
     }
     
+    public String obtenerIdentificador(){
+        return illm.obtenerIdentificador();
+    }
     
 }

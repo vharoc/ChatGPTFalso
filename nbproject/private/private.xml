@@ -5,10 +5,13 @@
         <group>
             <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/chatgptfalso/ChatGPTFalso.java</file>
             <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/modelo/Modelo.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/modelo/XML.java</file>
             <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/vista/AplicacionVista.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/modelo/IRepositorio.java</file>
             <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/modelo/FakeLLM.java</file>
             <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/vista/VistaConsolaSimple.java</file>
             <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/modelo/ILLM.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/modelo/JSON.java</file>
             <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/controlador/Controlador.java</file>
             <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/modelo/Conversacion.java</file>
             <file>file:/C:/Users/victo/OneDrive/Escritorio/java-uni/ChatGPTFalso/src/modelo/Mensaje.java</file>

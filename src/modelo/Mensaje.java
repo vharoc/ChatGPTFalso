@@ -14,7 +14,11 @@ public class Mensaje implements Serializable{
     private String remitente;
     private String contenido;
     private String fechaHora; // String o long
-
+    
+    public Mensaje(){
+        
+    }
+    
     public Mensaje(String remitente, String contenido, String fechaHora) {
         this.remitente = remitente;
         this.contenido = contenido;

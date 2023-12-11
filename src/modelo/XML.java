@@ -1,5 +1,7 @@
 package modelo;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.File;
@@ -8,7 +10,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class XML implements IRepositorio{
     
     @Override
     public void exportarConversacion(List<Conversacion> conversacion) {
-        Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "output.xml");
+        Path ruta = Paths.get(System.getProperty("user.home"), "OneDrive", "Escritorio", "jLLM", "output.xml");
         File f = ruta.toFile();
         try {
             XmlMapper xmlMapper = new XmlMapper();
@@ -42,7 +43,7 @@ public class XML implements IRepositorio{
     
     @Override
     public List<Conversacion> importarConversacion() {
-        Path ruta = Paths.get(System.getProperty("user.home"), "Desktop", "jLLM", "input.xml");
+        Path ruta = Paths.get(System.getProperty("user.home"), "OneDrive", "Escritorio", "jLLM", "input.xml");
         File f = ruta.toFile();
         try {
             XmlMapper xmlMapper = new XmlMapper();
