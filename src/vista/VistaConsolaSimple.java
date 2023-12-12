@@ -252,7 +252,7 @@ public class VistaConsolaSimple extends AplicacionVista {
                 default:
                     System.out.println("Opción no válida.");
             }
-        } while (opcion != 2);
+        } while (opcion != 0 && opcion != 1 && opcion != 2);
      
     }
     

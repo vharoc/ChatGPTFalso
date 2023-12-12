@@ -11,7 +11,9 @@ import java.util.List;
 /**
  *
  * @author victo
+ * 
  */
+
 public class Controlador {
     
     AplicacionVista v;

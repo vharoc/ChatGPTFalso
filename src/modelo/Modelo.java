@@ -16,6 +16,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -108,6 +110,16 @@ public class Modelo {
                     conversaciones.add(conversacion);
                 }
             }
+            
+            Map<Long, Conversacion> conversacionesMap = new HashMap<>();
+            for (Conversacion conversacion : conversaciones) {
+                conversacionesMap.put(conversacion.getFechaInicio(), conversacion);
+            }
+            Map<Long, Conversacion> conversacionesUnicasMap = new HashMap<>(conversacionesMap);
+            
+            conversaciones.clear();
+            conversaciones.addAll(conversacionesUnicasMap.values());
+            
             return true;
         } else {
             return false;

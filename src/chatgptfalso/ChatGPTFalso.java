@@ -9,6 +9,7 @@ import modelo.ILLM;
 import modelo.FakeLLM;
 import modelo.RandomCSVLLM;
 import vista.AplicacionVista;
+import vista.ConsolaVozVista;
 import vista.VistaConsolaSimple;
 
 /**
@@ -52,7 +53,7 @@ public class ChatGPTFalso {
             case "consola":
                 return new VistaConsolaSimple();
             case "voz":
-                // return new ConsolaSubMenusView();
+                return new ConsolaVozVista();
             default:
                 return new VistaConsolaSimple();
         }

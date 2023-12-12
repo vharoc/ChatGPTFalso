@@ -51,8 +51,6 @@ public class XML implements IRepositorio{
             // Utiliza TypeFactory para obtener el tipo de lista correcto
             return xmlMapper.readValue(xml, xmlMapper.getTypeFactory().constructCollectionType(List.class, Conversacion.class));
         } catch (IOException ex) {
-            // TODO veremos como cambiar esto cuando tratemos excepciones
-            // de momento retornaremos null si hay algún problema
             System.err.println("Error:" + ex.getMessage());
             return null;
         }

@@ -18,7 +18,7 @@ public class FakeLLM implements ILLM {
     
     @Override
     public String obtenerIdentificador(){
-        String fake = "fake";
+        String fake = "Agente FAKE";
         return fake;
     }
     
