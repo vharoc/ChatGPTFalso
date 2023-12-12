@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 
 import java.util.ArrayList;
 import java.util.List;
-import static com.coti.tools.Esdia.*;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -40,7 +39,8 @@ public class Modelo {
         ficheroEstadoSerializado = Paths.get(System.getProperty("user.home"), "OneDrive","Escritorio", "jLLM", "jLLM.bin").toFile();
     }
     
-
+    
+    // METODOS DE MODELO - TIPO CREACION
     public Mensaje crearMensaje(String remitente, String contenido, String fechaHora){
         Mensaje nuevoMensaje = new Mensaje(remitente, contenido, fechaHora);
         return nuevoMensaje;
@@ -50,31 +50,24 @@ public class Modelo {
         return new Conversacion(mensajes, identificador, fechaInicio, fechaFin);
     }
     
-    public String getConenidoMensaje(Mensaje mensaje){
-        String contenido = mensaje.getContenido();
-        return contenido;
-    }
     
     
+    // METODOS DE MODELO - TIPO AGREGACION
     public void agregarConversacionAConversaciones(Conversacion conversacion){
         conversaciones.add(conversacion);
     }
     
+    
+    
+    // METODOS DE MODELO - TIPO OBTENCION
+    public String getConenidoMensaje(Mensaje mensaje){
+        String contenido = mensaje.getContenido();
+        return contenido;
+    }
+
     public List<Conversacion> obtenerConversaciones() {
         return new ArrayList<>(conversaciones);
     }
-    
-    
-    public String formatearFecha(long fecha){
-        // Convertir a LocalDateTime
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(fecha), ZoneId.systemDefault());
-        // Formatear la fecha en el formato deseado
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss");
-        String fechaFormateada = localDateTime.format(formatter);
-        
-        return fechaFormateada;
-    }
-    
     
     public long obtenerEpoch(Conversacion conversacion){
         return conversacion.getFechaInicio();
@@ -96,10 +89,34 @@ public class Modelo {
         return mensaje.getFechaHora();
     }
     
+    public String obtenerIdentificador(){
+        return illm.obtenerIdentificador();
+    }
+
+    public String respuestaBot(String mensaje){
+        return illm.speak(mensaje);
+    }
+        
+    
+    
+    // METODOS DE MODELO - TIPO UTIL VISUAL
+    public String formatearFecha(long fecha){
+        // Convertir a LocalDateTime
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(fecha), ZoneId.systemDefault());
+        // Formatear la fecha en el formato deseado
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss");
+        String fechaFormateada = localDateTime.format(formatter);
+        
+        return fechaFormateada;
+    }
+      
     public boolean eliminarConversacion(Conversacion conversacion){
         return conversaciones.remove(conversacion);
     }
     
+    
+    
+    // METODOS DE CONTROLADOR - TIPO EXP./IMP.
     public boolean importarConversacion() {
         List<Conversacion> conver = repositorio.importarConversacion();
         
@@ -130,16 +147,9 @@ public class Modelo {
         repositorio.exportarConversacion(conversaciones);
     }
     
-    public String obtenerIdentificador(){
-        return illm.obtenerIdentificador();
-    }
     
     
-    public String respuestaBot(String mensaje){
-        return illm.speak(mensaje);
-    }
-    
-    
+    // METODOS MODELO PARA PERSISTENCIA DE DATOS
     public boolean guardarEstadoAplicación() {
 
         ObjectOutputStream oos = null;
@@ -193,6 +203,5 @@ public class Modelo {
         }
 
     }
-    
-    
+  
 }

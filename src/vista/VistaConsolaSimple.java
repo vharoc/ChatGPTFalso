@@ -203,18 +203,7 @@ public class VistaConsolaSimple extends AplicacionVista {
         }
         
     }
-    
-    // Método auxiliar para obtener los primeros 20 caracteres del primer mensaje
-    private String obtenerPrimeros20Caracteres(Conversacion conversacion) {
-        List<Mensaje> mensajes = c.obtenerMensajes(conversacion);
-        if (!mensajes.isEmpty()) {
-            Mensaje primerMensaje = c.obtenerMensajes(conversacion).get(0);
-            String contenidoPrimerMensaje = c.getContenidoMensaje(primerMensaje);
-            return contenidoPrimerMensaje.length() > 21 ? contenidoPrimerMensaje.substring(0, 21) : contenidoPrimerMensaje;
-        }
-        return ""; // Agrega un valor de retorno por defecto o manejo de error, si es necesario
-    }
-    
+
     public void importarExportarChats(){
         
         int opcion;
@@ -266,5 +255,15 @@ public class VistaConsolaSimple extends AplicacionVista {
         Esdia.readString("\nPresiona Enter para continuar... ");
     }
     
+    // Método auxiliar para obtener los primeros 20 caracteres del primer mensaje
+    private String obtenerPrimeros20Caracteres(Conversacion conversacion) {
+        List<Mensaje> mensajes = c.obtenerMensajes(conversacion);
+        if (!mensajes.isEmpty()) {
+            Mensaje primerMensaje = c.obtenerMensajes(conversacion).get(0);
+            String contenidoPrimerMensaje = c.getContenidoMensaje(primerMensaje);
+            return contenidoPrimerMensaje.length() > 21 ? contenidoPrimerMensaje.substring(0, 21) : contenidoPrimerMensaje;
+        }
+        return ""; // Agrega un valor de retorno por defecto o manejo de error, si es necesario
+    }
 }
 

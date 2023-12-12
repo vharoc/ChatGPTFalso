@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 
 /**
  *
  * @author victo
+ * 
  */
+
 public class RandomCSVLLM implements ILLM {
     
     @Override
@@ -22,9 +25,10 @@ public class RandomCSVLLM implements ILLM {
     public String speak(String mensajeUsuario) {
         File f = Paths.get(System.getProperty("user.home"), "OneDrive", "Escritorio", "jLLM", "input.csv").toFile();
         String delimitador = ",";
-
+        
         try {
             List<String> lineas = Files.readAllLines(f.toPath());
+            Collections.shuffle(lineas);
             for (String linea : lineas) {
                 ModeloCSV respuesta = getMensajeFromDelimitedString(linea, delimitador);
                 if (respuesta != null) {
@@ -50,7 +54,6 @@ public class RandomCSVLLM implements ILLM {
                         return respuesta.getMensaje();
                     }
                 }
-
             }
         } catch (IOException e) {
             return "Error al leer el archivo: " + e.getMessage();

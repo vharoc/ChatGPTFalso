@@ -28,9 +28,9 @@ public class Controlador {
     public void IniciarChat(){
         
         if(m.cargarEstadoAplicación()){
-            v.mostrarInicioAplicacion("Cargado estado anterior con exito");
             List<Conversacion> conversaciones = m.obtenerConversaciones();
-            System.out.println("NUMERO DE CONVERSACIONES CARGADAS: " + conversaciones.size());
+            v.mostrarInicioAplicacion("Cargado estado anterior con exito\n"
+                    + "NUMERO DE CONVERSACIONES CARGADAS: " + conversaciones.size());
         }else{
             v.mostrarInicioAplicacion("No se encontró fichero para carga del programa. Parece que es la primera ejecución");
         }
@@ -45,6 +45,7 @@ public class Controlador {
         
     }
     
+    // METODOS DE CONTROLADOR - TIPO CREACION
     
     public Mensaje crearMensaje(String remitente, String contenido, String fechaHora){
         return m.crearMensaje(remitente, contenido, fechaHora);
@@ -54,20 +55,21 @@ public class Controlador {
         return m.crearConversacion(mensajes, identificador, fechaInicio, fechaFin);
     }
     
-    public String getContenidoMensaje(Mensaje mensaje){
-        return m.getConenidoMensaje(mensaje);
-    }
+    
+    // METODOS DE CONTROLADOR - TIPO AGREGACION
     
     public void agregarConversacionAConversaciones(Conversacion conversacion){
         m.agregarConversacionAConversaciones(conversacion);
     }
     
+    // METODOS DE CONTROLADOR - TIPO OBTENCION
+    
+    public String getContenidoMensaje(Mensaje mensaje){
+        return m.getConenidoMensaje(mensaje);
+    }   
+    
     public List<Conversacion> obtenerConversaciones(){
         return m.obtenerConversaciones();
-    }
-    
-    public String formatearFecha(long fecha){
-        return m.formatearFecha(fecha);
     }
     
     public long obtenerEpoch(Conversacion conversacion){
@@ -90,10 +92,27 @@ public class Controlador {
         return m.getHora(mensaje);
     }
     
+    public String obtenerIdentificador(){
+        return m.obtenerIdentificador();
+    }
+      
+    public String respuestaBot(String mensaje){
+        return m.respuestaBot(mensaje);
+    }
+    
+    
+    // METODOS DE CONTROLADOR - TIPO UTIL VISUAL
+    
+    public String formatearFecha(long fecha){
+        return m.formatearFecha(fecha);
+    }
+       
     public boolean eliminarConversacion(Conversacion conversacion){
         return m.eliminarConversacion(conversacion);
     }
     
+    
+    // METODOS DE CONTROLADOR - TIPO EXP./IMP.
     public boolean importarConversacion() {
         return m.importarConversacion();
     }
@@ -102,12 +121,4 @@ public class Controlador {
         m.exportarConversacion();
     }
 
-    public String obtenerIdentificador(){
-        return m.obtenerIdentificador();
-    }
-    
-    public String respuestaBot(String mensaje){
-        return m.respuestaBot(mensaje);
-    }
-    
 }
