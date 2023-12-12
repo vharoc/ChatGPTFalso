@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,15 +34,15 @@ public class RandomCSVLLM implements ILLM {
             for (String linea : lineas) {
                 ModeloCSV respuesta = getMensajeFromDelimitedString(linea, delimitador);
                 if (respuesta != null) {
-                    if (mensajeUsuario.contains("?") && respuesta.getTipo().equals("pregunta")) {
+                    if ((mensajeUsuario.contains("?") || mensajeUsuario.contains("curioso"))&& respuesta.getTipo().equals("pregunta")) {
                         return respuesta.getMensaje();
                     } else if (mensajeUsuario.contains("equipo") && respuesta.getTipo().equals("equipo")) {
                         return respuesta.getMensaje();
-                    } else if (mensajeUsuario.contains("respuesta") && respuesta.getTipo().equals("respuesta")) {
+                    } else if ((mensajeUsuario.contains("respuesta") || mensajeUsuario.contains("necesito") || mensajeUsuario.contains("bien")) && respuesta.getTipo().equals("respuesta")) {
                         return respuesta.getMensaje();
                     } else if ((mensajeUsuario.contains("no") || mensajeUsuario.contains("nunca")) && respuesta.getTipo().equals("negacion")) {
                         return respuesta.getMensaje();
-                    } else if ((mensajeUsuario.contains("no?") || mensajeUsuario.contains(".")) && respuesta.getTipo().equals("afirmacion")) {
+                    } else if ((mensajeUsuario.contains("no?") || mensajeUsuario.contains(".") || mensajeUsuario.contains("si")) && respuesta.getTipo().equals("afirmacion")) {
                         return respuesta.getMensaje();
                     } else if ((mensajeUsuario.contains("hola") || mensajeUsuario.contains("que tal")) && respuesta.getTipo().equals("saludo")) {
                         return respuesta.getMensaje();
@@ -48,9 +50,7 @@ public class RandomCSVLLM implements ILLM {
                         return respuesta.getMensaje();
                     } else if (mensajeUsuario.contains("refran") && respuesta.getTipo().equals("refran")) {
                         return respuesta.getMensaje();
-                    } else if (mensajeUsuario.contains("pregunta") && respuesta.getTipo().equals("pregunta")) {
-                        return respuesta.getMensaje();
-                    } else if (mensajeUsuario.contains("bien") && respuesta.getTipo().equals("respuesta")) {
+                    } else if ((mensajeUsuario.contains("wow") || mensajeUsuario.contains("!")) && respuesta.getTipo().equals("sorpresa")) {
                         return respuesta.getMensaje();
                     }
                 }
@@ -58,8 +58,8 @@ public class RandomCSVLLM implements ILLM {
         } catch (IOException e) {
             return "Error al leer el archivo: " + e.getMessage();
         }
-
-        return "No se encontró una respuesta adecuada para la consulta del usuario.";
+        
+        return "No se encontro una respuesta apropiada";
     }
 
     public static ModeloCSV getMensajeFromDelimitedString(String delimitedString /*linea*/, String delimiter /*,*/) {

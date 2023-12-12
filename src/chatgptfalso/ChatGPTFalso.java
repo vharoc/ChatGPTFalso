@@ -1,6 +1,7 @@
 package chatgptfalso;
 
 import controlador.Controlador;
+
 import modelo.Modelo;
 import modelo.IRepositorio;
 import modelo.JSON;
@@ -8,6 +9,8 @@ import modelo.XML;
 import modelo.ILLM;
 import modelo.FakeLLM;
 import modelo.RandomCSVLLM;
+import modelo.SmartLLM;
+
 import vista.AplicacionVista;
 import vista.ConsolaVozVista;
 import vista.VistaConsolaSimple;
@@ -76,6 +79,8 @@ public class ChatGPTFalso {
                 return new FakeLLM();
             case "csv":
                 return new RandomCSVLLM();
+            case "smart":
+                return new SmartLLM();
             default:
                 return new FakeLLM();
         }

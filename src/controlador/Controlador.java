@@ -45,8 +45,7 @@ public class Controlador {
         
     }
     
-    // METODOS DE CONTROLADOR - TIPO CREACION
-    
+    // METODOS DE CONTROLADOR - TIPO CREACION  
     public Mensaje crearMensaje(String remitente, String contenido, String fechaHora){
         return m.crearMensaje(remitente, contenido, fechaHora);
     }
@@ -56,14 +55,13 @@ public class Controlador {
     }
     
     
-    // METODOS DE CONTROLADOR - TIPO AGREGACION
-    
+    // METODOS DE CONTROLADOR - TIPO AGREGACION 
     public void agregarConversacionAConversaciones(Conversacion conversacion){
         m.agregarConversacionAConversaciones(conversacion);
     }
     
-    // METODOS DE CONTROLADOR - TIPO OBTENCION
     
+    // METODOS DE CONTROLADOR - TIPO OBTENCION
     public String getContenidoMensaje(Mensaje mensaje){
         return m.getConenidoMensaje(mensaje);
     }   
@@ -102,7 +100,6 @@ public class Controlador {
     
     
     // METODOS DE CONTROLADOR - TIPO UTIL VISUAL
-    
     public String formatearFecha(long fecha){
         return m.formatearFecha(fecha);
     }
