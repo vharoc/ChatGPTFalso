@@ -11,7 +11,7 @@ import java.util.Random;
  **/
 
 public class FakeLLM implements ILLM {
-    private static final List<String> SALUDOS = Arrays.asList("hola", "¡hola!", "saludos", "buenos días", "buenas tardes", "buenas noches");
+    private static final List<String> SALUDOS = Arrays.asList("hola", "hola!", "saludos", "buenos días", "buenas tardes", "buenas noches", "como estas?");
     private static final List<String> CONSEJOS = Arrays.asList("ten cuidado", "sigue así", "no te preocupes demasiado", "disfruta el momento");
     private static final List<String> RESPUESTAS_GENERICAS = Arrays.asList("Interesante", "¿Me puedes contar más?", "¡Eso suena bien!");
 
@@ -24,7 +24,7 @@ public class FakeLLM implements ILLM {
     
     
     @Override
-    public String generarRespuesta(String mensajeUsuario) {
+    public String speak(String mensajeUsuario) {
         // Convertir el mensaje a minúsculas para hacer la comparación de manera insensible a mayúsculas
         mensajeUsuario = mensajeUsuario.toLowerCase();
 

@@ -47,9 +47,7 @@ public class JSON implements IRepositorio{
             Type tipoDeLista = new TypeToken<List<Conversacion>>() {}.getType();
             return gson.fromJson(json, tipoDeLista);
         } catch (IOException ex) {
-            // TODO veremos como cambiar esto cuando tratemos excepciones
-            // de momento retornaremos null si hay algún problema
-            System.err.println("Error:" + ex.getMessage());
+            // System.err.println("Error:" + ex.getMessage());
             return null;
         }
     }

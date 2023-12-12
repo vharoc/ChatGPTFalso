@@ -7,18 +7,18 @@ import modelo.JSON;
 import modelo.XML;
 import modelo.ILLM;
 import modelo.FakeLLM;
+import modelo.RandomCSVLLM;
 import vista.AplicacionVista;
 import vista.VistaConsolaSimple;
 
 /**
  *
  * @author victo
+ * 
  */
+
 public class ChatGPTFalso {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         
         IRepositorio repository;
@@ -27,11 +27,11 @@ public class ChatGPTFalso {
         
         // LLamada esperada java -jar app.jar repository model view
         // por ejemplo: java -jar app.jar xml fake consola
+        
         if(args.length == 3){
             repository = obtenerRepositorio(args[0]);
             illm = obternerILLM(args[1]);
             view = obtenerVista(args[2]);
-            //repository = getRepositoryForOption(args[1]);
             
         }else{
             // Opciones por defecto:
@@ -74,7 +74,7 @@ public class ChatGPTFalso {
             case "fake":
                 return new FakeLLM();
             case "csv":
-                // return new JSON();
+                return new RandomCSVLLM();
             default:
                 return new FakeLLM();
         }

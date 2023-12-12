@@ -1,15 +1,12 @@
 package controlador;
 
 import vista.AplicacionVista;
-import vista.VistaConsolaSimple;
 
 import modelo.Mensaje;
 import modelo.Modelo;
 import modelo.Conversacion;
 
 import java.util.List;
-
-import java.time.Instant;
 
 /**
  *
@@ -27,9 +24,23 @@ public class Controlador {
     }
     
     public void IniciarChat(){
-        v.mostrarInicioAplicacion("HOLAH MU BUENA, ETO EH 'jLLM'");
+        
+        if(m.cargarEstadoAplicación()){
+            v.mostrarInicioAplicacion("Cargado estado anterior con exito");
+            List<Conversacion> conversaciones = m.obtenerConversaciones();
+            System.out.println("NUMERO DE CONVERSACIONES CARGADAS: " + conversaciones.size());
+        }else{
+            v.mostrarInicioAplicacion("No se encontró fichero para carga del programa. Parece que es la primera ejecución");
+        }
+            
         v.mostrarMenuPrincipal();
-        v.mostrarFinPrograma("\nHASTA LA PROXIMAAAAA");
+        
+        if(m.guardarEstadoAplicación()){
+            v.mostrarFinPrograma("Guardado el estado de la aplicación.\nSaliendo...");
+        }else{
+            v.mostrarFinPrograma("No se pudo guardar el estado de la aplicación.\nSaliendo...");
+        }
+        
     }
     
     
@@ -93,5 +104,8 @@ public class Controlador {
         return m.obtenerIdentificador();
     }
     
-
+    public String respuestaBot(String mensaje){
+        return m.respuestaBot(mensaje);
+    }
+    
 }

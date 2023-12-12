@@ -27,13 +27,15 @@ public class Modelo {
         
     private List<Conversacion> conversaciones = new ArrayList<>();
     
-    private ILLM illm;
-    private IRepositorio repositorio;
+    private final ILLM illm;
+    private final IRepositorio repositorio;
     
+    File ficheroEstadoSerializado;
     
     public Modelo(IRepositorio repositorio, ILLM illm){
         this.repositorio = repositorio;
         this.illm = illm;
+        ficheroEstadoSerializado = Paths.get(System.getProperty("user.home"), "OneDrive","Escritorio", "jLLM", "jLLM.bin").toFile();
     }
     
 
@@ -113,11 +115,72 @@ public class Modelo {
     }
     
     public void exportarConversacion() {
-       repositorio.exportarConversacion(conversaciones);
+        repositorio.exportarConversacion(conversaciones);
     }
     
     public String obtenerIdentificador(){
         return illm.obtenerIdentificador();
     }
+    
+    
+    public String respuestaBot(String mensaje){
+        return illm.speak(mensaje);
+    }
+    
+    
+    public boolean guardarEstadoAplicación() {
+
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream(ficheroEstadoSerializado));
+            oos.writeObject(conversaciones);
+            return true;
+        } catch (IOException ex) {
+            // Dejamos el error para la depuración, por el canal err.
+            System.err.println("Error durante la serialización: " + ex.getMessage());
+            return false;
+        } finally {
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException ex) {
+                    // Dejamos el error para la depuración, por el canal err.
+                    System.err.println("Error al cerrar el flujo: " + ex.getMessage());
+                    return false;
+                }
+            }
+        }
+
+    }
+    
+    public boolean cargarEstadoAplicación() {
+
+        if (ficheroEstadoSerializado.exists() && ficheroEstadoSerializado.isFile()) {
+            ObjectInputStream ois = null;
+            try {
+                ois = new ObjectInputStream(new FileInputStream(ficheroEstadoSerializado));
+                this.conversaciones = (List<Conversacion>) ois.readObject();
+            } catch (IOException | ClassNotFoundException ex) {
+                // Dejamos el error para la depuración, por el canal err.
+                System.err.println("Error durante la deserialización: " + ex.getMessage());
+                return false;
+            } finally {
+                if (ois != null) {
+                    try {
+                        ois.close();
+                    } catch (IOException ex) {
+                        // Dejamos el error para la depuración, por el canal err.
+                        System.err.println("Error durante la deserialización: " + ex.getMessage());
+                        return false;
+                    }
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    
     
 }
