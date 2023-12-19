@@ -3,7 +3,6 @@ package vista;
 import com.coti.tools.Esdia;
 import static com.coti.tools.Esdia.*;
 
-import modelo.FakeLLM;
 import modelo.Conversacion;
 import modelo.Mensaje;
 
@@ -32,7 +31,7 @@ public class VistaConsolaSimple extends AplicacionVista {
             System.out.println("\n--- MENU CONSOLA SIMPLE ---");
             System.out.println("1. Nueva conversacion");
             System.out.println("2. Listar/Eliminar conversaciones");
-            System.out.println("3. Exportacion chats");
+            System.out.println("3. Exportacion/Importacion chats");
             System.out.println("4. Salir");
             opcion = readInt("Ingrese una opción: ");
             System.out.println("");

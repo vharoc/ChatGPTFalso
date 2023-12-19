@@ -121,7 +121,7 @@ public class ConsolaVozVista extends AplicacionVista {
                 System.out.println("\n--- MENU CONSOLA VISTA ---");
                 System.out.println("1. Nueva conversacion");
                 System.out.println("2. Listar/Eliminar conversaciones");
-                System.out.println("3. Exportacion chats");
+                System.out.println("3. Exportacion/Importacion chats");
                 System.out.println("4. Salir");
             }
             

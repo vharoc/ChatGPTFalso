@@ -12,8 +12,8 @@ import java.util.Random;
 
 public class FakeLLM implements ILLM {
     
-    private static final List<String> SALUDOS = Arrays.asList("hola", "hola!", "saludos", "buenos días", "buenas tardes", "buenas noches", "como estas?");
-    private static final List<String> SALUDOS_RESPUESTA = Arrays.asList("¡Hola! ¿Cómo estás?", "Hola, ¿cómo fue tu día?");
+    private static final List<String> SALUDOS = Arrays.asList("hola", "hola!", "saludos", "buenos dias", "buenas tardes", "buenas noches", "como estas?");
+    private static final List<String> SALUDOS_RESPUESTA = Arrays.asList("Hola! Como estas?", "Hola, como fue tu dia?");
     private static final List<String> ESTADO = Arrays.asList("bien", "bien y tú?", "contento", "y tú?", "como estas?");
     private static final List<String> ESTADO_POSITIVO = Arrays.asList("Me alegra escucharlo. ¿Algo emocionante sucedió?", "Yo también estoy bien, ¿quieres contarme algo interesante?");
     private static final List<String> DESPEDIDAS = Arrays.asList("adios", "hasta luego", "nos vemos", "chao");

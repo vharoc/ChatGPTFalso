@@ -3,8 +3,9 @@ package controlador;
 import vista.AplicacionVista;
 
 import modelo.Mensaje;
-import modelo.Modelo;
 import modelo.Conversacion;
+import modelo.Modelo;
+
 
 import java.util.List;
 
@@ -38,9 +39,9 @@ public class Controlador {
         v.mostrarMenuPrincipal();
         
         if(m.guardarEstadoAplicación()){
-            v.mostrarFinPrograma("Guardado el estado de la aplicación.\nSaliendo...");
+            v.mostrarFinPrograma("Guardado el estado de la aplicacion.\nSaliendo...");
         }else{
-            v.mostrarFinPrograma("No se pudo guardar el estado de la aplicación.\nSaliendo...");
+            v.mostrarFinPrograma("No se pudo guardar el estado de la aplicacion.\nSaliendo...");
         }
         
     }
